@@ -50,7 +50,7 @@ Intel Xeon W-2123 CPU 3.60GHz, 1 CPU, 8 logical and 4 physical cores
 |------------- |---------:|---------:|---------:|----------:|---------:|--------:|----------:|
 | ReadResource | 23.16 ms | 0.459 ms | 0.969 ms | 2562.5000 | 562.5000 | 62.5000 |  12.65 MB |
 
-``
+```
 // * Hints *
 Outliers
   ODataResourcePropertyVerificationBenchmarks.ReadResource: Default -> 9 outliers were removed (26.86 ms..40.75 ms)
