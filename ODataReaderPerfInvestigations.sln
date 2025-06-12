@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODataReaderPerfInvestigatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.OData.Core", "..\..\..\..\..\..\odata.net\src\Microsoft.OData.Core\Microsoft.OData.Core.csproj", "{B0E1C823-DA90-9E2D-4578-05FC5C351999}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.OData.Edm", "..\..\..\..\..\..\odata.net\src\Microsoft.OData.Edm\Microsoft.OData.Edm.csproj", "{A1201D5C-FB6D-018A-DE4E-2859F88ED696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Spatial", "..\..\..\..\..\..\odata.net\src\Microsoft.Spatial\Microsoft.Spatial.csproj", "{B4602E52-58D5-E225-4B6B-8F3BBBF80256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B0E1C823-DA90-9E2D-4578-05FC5C351999}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0E1C823-DA90-9E2D-4578-05FC5C351999}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0E1C823-DA90-9E2D-4578-05FC5C351999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1201D5C-FB6D-018A-DE4E-2859F88ED696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1201D5C-FB6D-018A-DE4E-2859F88ED696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1201D5C-FB6D-018A-DE4E-2859F88ED696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1201D5C-FB6D-018A-DE4E-2859F88ED696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4602E52-58D5-E225-4B6B-8F3BBBF80256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4602E52-58D5-E225-4B6B-8F3BBBF80256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4602E52-58D5-E225-4B6B-8F3BBBF80256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4602E52-58D5-E225-4B6B-8F3BBBF80256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
