@@ -67,3 +67,63 @@ Outliers
 ```
 
 ![alt text](odl-7-baseline-verify-properties-cpu-usage.png)
+
+## ODL 7.x after skipping verification
+
+Implementing the following changes in `ODataJsonLightPropertyAndValueDeserializer.AddResourceProperty` method:
+
+```diff
++Debug.Assert(!(property.Value is ODataResourceValue), Strings.ODataResource_PropertyValueCannotBeODataResourceValue(property.Name));
++Debug.Assert(
++    !(property.Value is ODataCollectionValue collectionValue && collectionValue.Items.Any(item => item is ODataResourceValue)),
++    Strings.ODataResource_PropertyValueCannotBeODataResourceValue(property.Name));
+
++bool skipPropertyVerification = resource.SkipPropertyVerification;
+resource.SkipPropertyVerification = true;
+resource.Properties = resource.Properties.ConcatToReadOnlyEnumerable("Properties", property);
++resource.SkipPropertyVerification = skipPropertyVerification;
+return property;
+```
+
+
+```sh
+// * Detailed results *
+ODataResourcePropertyVerificationBenchmarks.ReadResource: DefaultJob
+Runtime = .NET 8.0.17 (8.0.1725.26602), X64 RyuJIT AVX-512F+CD+BW+DQ+VL; GC = Concurrent Workstation
+Mean = 4.377 ms, StdErr = 0.023 ms (0.54%), N = 28, StdDev = 0.124 ms
+Min = 4.151 ms, Q1 = 4.277 ms, Median = 4.367 ms, Q3 = 4.468 ms, Max = 4.554 ms
+IQR = 0.190 ms, LowerFence = 3.992 ms, UpperFence = 4.753 ms
+ConfidenceInterval = [4.290 ms; 4.464 ms] (CI 99.9%), Margin = 0.087 ms (1.98% of Mean)
+Skewness = -0.06, Kurtosis = 1.8, MValue = 2
+-------------------- Histogram --------------------
+[4.097 ms ; 4.280 ms) | @@@@@@@@
+[4.280 ms ; 4.459 ms) | @@@@@@@@@@@@@
+[4.459 ms ; 4.608 ms) | @@@@@@@
+---------------------------------------------------
+```
+
+```sh
+// * Summary *
+
+BenchmarkDotNet v0.15.1, Windows 11 (10.0.26100.3775/24H2/2024Update/HudsonValley)
+Intel Xeon W-2123 CPU 3.60GHz, 1 CPU, 8 logical and 4 physical cores
+.NET SDK 10.0.100-preview.1.25120.13
+  [Host]     : .NET 8.0.17 (8.0.1725.26602), X64 RyuJIT AVX-512F+CD+BW+DQ+VL
+  DefaultJob : .NET 8.0.17 (8.0.1725.26602), X64 RyuJIT AVX-512F+CD+BW+DQ+VL
+```
+
+
+| Method       | Mean     | Error     | StdDev    | Gen0     | Gen1     | Allocated |
+|------------- |---------:|----------:|----------:|---------:|---------:|----------:|
+| ReadResource | 4.377 ms | 0.0867 ms | 0.1243 ms | 609.3750 | 453.1250 |   3.26 MB |
+
+```sh
+// * Legends *
+  Mean      : Arithmetic mean of all measurements
+  Error     : Half of 99.9% confidence interval
+  StdDev    : Standard deviation of all measurements
+  Gen0      : GC Generation 0 collects per 1000 operations
+  Gen1      : GC Generation 1 collects per 1000 operations
+  Allocated : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms      : 1 Millisecond (0.001 sec)
+```

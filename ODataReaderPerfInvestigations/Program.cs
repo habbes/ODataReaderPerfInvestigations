@@ -3,10 +3,10 @@
 using BenchmarkDotNet.Running;
 using ODataReaderPerfInvestigations;
 
-//BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
 //DebugTestBenchmark();
-DebugReader();
+//DebugReader();
 
 void DebugTestBenchmark()
 {
